@@ -1,0 +1,81 @@
+//
+//  main.cpp
+//  oky
+//
+//  Created by aashna on 20/06/17.
+//  Copyright © 2017 q. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <string>
+#include <climits>
+#include <cassert>
+#include <map>
+#include <set>
+
+using namespace std;
+
+void maxSubarray(int *ar, int n)
+{
+    map<int, int> m;
+    int i,sum=0,len=0,start=0,end=-1;
+    for (i=0; i<n ; i++)
+    {
+        if(ar[i]==0)
+            ar[i]=-1;
+    }
+    for (i=0; i<n ; i++)
+    {
+        sum+=ar[i];
+        if(sum==0)
+        {
+            start=0;
+            end=i;
+            len=i+1;
+        }
+        if(m.find(sum)!=m.end())
+        {
+            if(len<i-m[sum])
+            {
+                start=m[sum]+1;
+                end=i;
+                len=i-m[sum];
+            }
+        }
+        else
+            m[sum]=i;
+    }
+    cout<<len;
+}
+
+int main(int argc, const char * argv[])
+{
+   
+    int i,n,ele;
+    cin>>n;
+    int* ar=new int[n];
+    for (i=0; i<n; i++)
+    {
+        cin>>ar[i];
+    }
+    maxSubarray(ar, n);
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
