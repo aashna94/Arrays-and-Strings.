@@ -1,0 +1,68 @@
+//
+//  main.cpp
+//  oky
+//
+//  Created by aashna on 20/06/17.
+//  Copyright © 2017 q. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <string>
+#include <climits>
+#include <cassert>
+#include <algorithm>
+#include <map>
+#include <set>
+
+using namespace std;
+
+void equilibrium(int *ar, int n)
+{
+    int sum=0, leftsum=0,i;
+    for (i=0; i<n ; i++)
+    {
+        sum+=ar[i];
+    }
+    for (i=0; i<n ; i++)
+    {
+        sum-=ar[i];
+        if(leftsum==sum)
+        {
+            cout<<i;
+            break;
+        }
+        leftsum+=ar[i];
+    }
+}
+
+int main(int argc, const char * argv[])
+{
+   
+    int i,n,k;
+    cin>>n;
+    int* ar=new int[n];
+    for (i=0; i<n; i++)
+    {
+        cin>>ar[i];
+    }
+    equilibrium(ar, n);
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
