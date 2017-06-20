@@ -1,0 +1,87 @@
+//
+//  main.cpp
+//  oky
+//
+//  Created by aashna on 20/06/17.
+//  Copyright © 2017 q. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <string>
+#include <climits>
+#include <cassert>
+#include <algorithm>
+#include <map>
+#include <set>
+
+using namespace std;
+
+void height(int *ar, int n, int k)
+{
+    sort(ar, ar+n);
+    if(n<=1)
+        return;
+    int maxi,mini,newMax,newMin,i;
+    maxi=ar[n-1];
+    mini=ar[0];
+    if(k>=maxi-mini)
+    {
+        for (i=0; i<n ; i++)
+        {
+            ar[i]+=k;
+        }
+        cout<<maxi-mini;
+        return;
+    }
+    ar[0]+=k;
+    ar[n-1]-=k;
+    newMax=max(ar[0], ar[n-1]);
+    newMin=min(ar[0], ar[n-1]);
+    for (i=1; i<n-2; i++)
+    {
+        if(ar[i]<newMin)
+            ar[i]+=k;
+        else if(ar[i]>newMax)
+            ar[i]-=k;
+        else if ((ar[i]-newMin)>(newMax-ar[i]))
+            ar[i]-=k;
+        else
+            ar[i]+=k;
+
+        newMax=max(ar[i], newMax);
+        newMin=min(ar[i], newMin);
+    }
+    cout<<newMax-newMin;
+}
+
+int main(int argc, const char * argv[])
+{
+   
+    int i,n,k;
+    cin>>n>>k;
+    int* ar=new int[n];
+    for (i=0; i<n; i++)
+    {
+        cin>>ar[i];
+    }
+    height(ar, n, k);
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
