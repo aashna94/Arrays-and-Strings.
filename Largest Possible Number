@@ -1,0 +1,66 @@
+//
+//  main.cpp
+//  oky
+//
+//  Created by aashna on 20/06/17.
+//  Copyright © 2017 q. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <string>
+#include <climits>
+#include <cassert>
+#include <algorithm>
+#include <map>
+#include <set>
+
+using namespace std;
+
+int comp(string a, string b)
+{
+    string ab=a.append(b);
+    string ba=b.append(a);
+    return ab.compare(ba)>0 ? 1:0;
+}
+void largestPossibleNum(vector<string> ar)
+{
+    sort(ar.begin(), ar.end(), comp);
+    for (int i=0; i<ar.size(); i++)
+    {
+        cout<<ar[i];
+    }
+}
+
+int main(int argc, const char * argv[])
+{
+   
+    int i,n,k;
+    cin>>n;
+    string temp;
+    vector<string> ar;
+    for (i=0; i<n; i++)
+    {
+        cin>>temp;
+        ar.push_back(temp);
+    }
+    largestPossibleNum(ar);
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
