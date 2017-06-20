@@ -1,0 +1,96 @@
+//
+//  main.cpp
+//  oky
+//
+//  Created by aashna on 20/06/17.
+//  Copyright © 2017 q. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <string>
+#include <climits>
+#include <cassert>
+#include <set>
+#define size 3
+
+using namespace std;
+
+struct item
+{
+    string word;
+    int len;
+};
+
+bool isAdj(string &a, string &b)
+{
+    int cnt=0;
+    int n=a.length();
+    for (int i=0; i<n ; i++)
+    {
+        if(a[i]!=b[i])
+            cnt++;
+        if(cnt>1)
+            return false;
+    }
+    return (cnt==1)?true:false;
+}
+
+int wordLadder(string s, string t, set<string> &dict)
+{
+    queue<item> que;
+    item i={s,1};
+    que.push(i);
+    set<string>::iterator it;
+    while (!que.empty())
+    {
+        item cur=que.front();
+        que.pop();
+        for (it=dict.begin(); it!=dict.end(); it++)
+        {
+            string temp=*it;
+            if(isAdj(cur.word,temp))
+            {
+                cout<<temp<<"-->";
+                i.word=temp;
+                i.len=cur.len+1;
+                que.push(i);
+                dict.erase(temp);
+                if(temp==t)
+                    return i.len;
+            }
+        }
+    }
+    return 0;
+}
+
+int main(int argc, const char * argv[])
+{
+   
+    int i,n;
+    cin>>n;
+    set<string> dict;
+    string temp,source,target;
+    for (i=0; i<n ; i++)
+    {
+        cin>>temp;
+        dict.insert(temp);
+    }
+    cin>>source>>target;
+    int res=wordLadder(source, target, dict);
+    cout<<res;
+    return 0;
+}
+
+
+/*Input: 7
+   POON PLEE SAME POIE PLEA PLIE POIN
+   TOON PLEA
+   
+   OUTPUT:7
+   POON-->POIN-->POIE-->PLIE-->PLEE-->PLEA
+*/
+
+   
