@@ -1,0 +1,48 @@
+//
+//  main.cpp
+//  oky
+//
+//  Created by aashna on 20/06/17.
+//  Copyright © 2017 q. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <string>
+#include <climits>
+#include <stdio.h>
+#include <string.h>
+#include <cassert>
+#include <algorithm>
+#include <map>
+#include <set>
+
+using namespace std;
+
+bool isSubsequence(string s1, string s2)
+{
+    int i=0, j=0;
+    int n=s1.size();
+    int m=s2.size();
+    for (i=0; i<n && j<m; i++)
+    {
+        if(s1[i]==s2[j])
+            j++;
+    }
+    return (j==m);
+}
+
+int main(int argc, const char * argv[])
+{
+    string s1, s2;
+    cin>>s1;
+    cin>>s2;
+    if(isSubsequence(s1, s2))
+        cout<<"\nYes";
+    else
+        cout<<"\nNo";
+    
+    return 0;
+}
