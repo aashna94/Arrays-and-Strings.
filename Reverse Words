@@ -1,0 +1,63 @@
+//
+//  main.cpp
+//  oky
+//
+//  Created by aashna on 20/06/17.
+//  Copyright © 2017 q. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <unordered_set>
+#include <string>
+#include <climits>
+#include <stdio.h>
+#include <string.h>
+#include <cassert>
+#include <algorithm>
+#include <map>
+#include <set>
+
+using namespace std;
+
+void revesre(char *beg, char *end)
+{
+    while (beg<end)
+    {
+        char temp=*beg;
+        *beg++=*end;
+        *end--=temp;
+    }
+}
+
+void wordsRevesr(char *str)
+{
+    char *word=NULL;
+    char *temp=str;
+    while (*temp)
+    {
+        if(word==NULL && *temp!=' ')
+            word=temp;
+        if(word && ((*(temp+1)==' ')||(*(temp+1)=='\0')))
+        {
+            revesre(word, temp);
+            word=NULL;
+        }
+        temp++;
+    }
+    revesre(str, temp-1);
+    cout<<str;
+}
+
+int main(int argc, const char * argv[])
+{
+   
+    
+    char s[100];
+    gets(s);
+    wordsRevesr(s);
+    
+    return 0;
+}
+
