@@ -1,0 +1,163 @@
+//
+//  main.cpp
+//  oky
+//
+//  Created by aashna on 20/06/17.
+//  Copyright © 2017 q. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <string>
+#include <climits>
+#include <stdio.h>
+#include <string.h>
+#include <cassert>
+#include <algorithm>
+#include <stack>
+#include <map>
+#include <list>
+#include <set>
+#include <math.h>
+
+using namespace std;
+
+class heap
+{
+    int cap,size;
+    int *ar;
+public:
+    heap(int c);
+    void insert(int k);
+    int parent(int i);
+    int left(int i);
+    int right(int i);
+    void decreaseKey(int i, int val);
+    int extractMin();
+    int getMin();
+    void deleteKey(int i);
+    void minHeapify(int i);
+};
+
+heap::heap(int c)
+{
+    cap=c;
+    size=0;
+    ar=new int[cap];
+}
+
+void heap::insert(int k)
+{
+    if(size==cap)
+    {
+        cout<<"\nOverflow";
+        return;
+    }
+    int i=size;
+    ar[i]=k;
+    size--;
+    while (i!=0 && ar[parent(i)]>ar[i])
+    {
+        swap(ar[parent(i)], ar[i]);
+        i=parent(i);
+    }
+}
+
+int heap::parent(int i)
+{
+    return (i-1)/2;
+}
+
+int heap::left(int i)
+{
+    return 2*i+1;
+}
+
+int heap::right(int i)
+{
+    return 2*i+2;
+}
+
+void heap::decreaseKey(int i , int val)
+{
+    ar[i]=val;
+    while (i!=0 && ar[parent(i)]>ar[i])
+    {
+        swap(ar[parent(i)], ar[i]);
+        i=parent(i);
+    }
+}
+
+int heap::extractMin()
+{
+    if(size<=0)
+        return INT_MAX;
+    if(size==1)
+    {
+        size--;
+        return ar[0];
+    }
+    int root=ar[0];
+    ar[0]=ar[size-1];
+    size--;
+    minHeapify(0);
+    return root;
+}
+
+void heap::deleteKey(int i)
+{
+    decreaseKey(i, INT_MIN);
+    extractMin();
+}
+
+int heap::getMin()
+{
+    return ar[0];
+}
+
+void heap::minHeapify(int i)
+{
+    int l=left(i);
+    int r=right(i);
+    int smallest=i;
+    if(l<size && ar[l]<ar[i])
+        smallest=l;
+    if(r<size && ar[r]<ar[smallest])
+        smallest=r;
+    if(smallest!=i)
+    {
+        swap(ar[smallest], ar[i]);
+        minHeapify(smallest);
+    }
+}
+
+
+
+int main(int argc, const char * argv[])
+{
+    int n,i,ele;
+    cin>>n;
+   // int *ar=new int[n];
+    heap h(n);
+    for (i=0; i<n ; i++)
+    {
+        cin>>ele;
+        h.insert(ele);
+    }
+    cin>>ele;
+    for (i=0; i<ele-1; i++)
+    {
+        h.extractMin();
+    }
+    cout<<h.getMin();
+    
+    return 0;
+}
+
+
+
+
+
+
