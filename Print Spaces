@@ -1,0 +1,58 @@
+//
+//  main.cpp
+//  oky
+//
+//  Created by aashna on 20/06/17.
+//  Copyright © 2017 q. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <string>
+#include <climits>
+#include <stdio.h>
+#include <string.h>
+#include <cassert>
+#include <algorithm>
+#include <stack>
+#include <map>
+#include <list>
+#include <set>
+#include <math.h>
+
+using namespace std;
+
+void util(char *str, char *buf, int i, int j, int n)
+{
+    if(i==n)
+    {
+        buf[j]='\0';
+        cout<<buf<<endl;
+        return;
+    }
+    buf[j]=str[i];
+    util(str, buf, i+1, j+1, n);
+    buf[j]=' ';
+    buf[j+1]=str[i];
+    util(str, buf, i+1, j+2, n);
+}
+
+void printPattern(char *str)
+{
+    int n=strlen(str);
+    char buf[2*n];
+    buf[0]=str[0];
+    util(str, buf, 1, 1, n);
+}
+
+int main(int argc, const char * argv[])
+{
+    char str[100];
+    cin>>str;
+    printPattern(str);
+    
+    
+    return 0;
+}
