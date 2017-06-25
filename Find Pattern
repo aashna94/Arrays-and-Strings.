@@ -1,0 +1,83 @@
+//
+//  main.cpp
+//  hmm
+//
+//  Created by aashna on 25/06/17.
+//  Copyright © 2017 q. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <string>
+#include <climits>
+#include <stdio.h>
+#include <string.h>
+#include <cassert>
+#include <algorithm>
+#include <stack>
+#include <map>
+#include <list>
+#include <set>
+#include <math.h>
+
+using namespace std;
+
+bool util(string str, int n, int i, string pat, int m, int j, map<char, string> &m1)
+{
+    int len;
+    if(i==n && j==m)
+        return true;
+    if(i==n || j==m)
+        return false;
+    char ch=pat[j];
+    if(m1.find(ch) != m1.end())
+    {
+        string s=m1[ch];
+        len=s.size();
+        string substr=str.substr(i,len);
+        if(substr.compare(s))
+            return false;
+        return util(str, n , i+len, pat, m, j+1, m1);
+    }
+    for (len=1 ; len<=n-i; len++)
+    {
+        m1[ch]=str.substr(i,len);
+        if(util(str, n , i+len, pat, m, j+1, m1))
+            return true;
+        m1.erase(ch);
+    }
+    return false;
+}
+
+void findPattern(string str, string pat)
+{
+    int m=pat.size();
+    int n=str.size();
+    if(n<m)
+        return;
+    map<char, string> m1;
+    if(util(str, n, 0, pat, m, 0, m1))
+    {
+        map<char, string>::iterator i;
+        for (i=m1.begin(); i!=m1.end(); i++)
+        {
+            cout<<i->first<<"--->"<<i->second<<endl;
+        }
+    }
+    else
+        cout<<"\nNo Pattern exist";
+}
+
+
+int main(int argc, const char * argv[])
+{
+    string str, pat;
+    cin>>str;
+    cin>>pat;
+    findPattern(str, pat);
+    
+    return 0;
+}
+
