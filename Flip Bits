@@ -1,0 +1,46 @@
+//
+//  main.cpp
+//  hmm
+//
+//  Created by aashna on 25/06/17.
+//  Copyright © 2017 q. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <string>
+#include <climits>
+#include <stdio.h>
+#include <string.h>
+#include <cassert>
+#include <algorithm>
+#include <stack>
+#include <map>
+#include <list>
+#include <set>
+#include <math.h>
+
+using namespace std;
+
+void countBits(int a, int b)
+{
+    int i,cnt=0;
+    for (i=a^b; i!=0; i=i&(i-1))
+    {
+        cnt++;
+    }
+    cout<<cnt;
+}
+
+
+int main(int argc, const char * argv[])
+{
+    
+    int a,b;
+    cin>>a>>b;
+    
+    countBits(a , b);
+    return 0;
+}
