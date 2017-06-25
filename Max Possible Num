@@ -1,0 +1,57 @@
+//
+//  main.cpp
+//  hmm
+//
+//  Created by aashna on 25/06/17.
+//  Copyright © 2017 q. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <string>
+#include <climits>
+#include <stdio.h>
+#include <string.h>
+#include <cassert>
+#include <algorithm>
+#include <stack>
+#include <map>
+#include <list>
+#include <set>
+#include <math.h>
+
+using namespace std;
+
+void maxPossibleNum(string str, string &maxi, int k)
+{
+    if(k==0)
+        return;
+    int i,j;
+    for (i=0; i<str.size(); i++)
+    {
+        for (j=i+1; j<str.size(); j++)
+        {
+            swap(str[i], str[j]);
+            if(str.compare(maxi)>0)
+                maxi=str;
+            maxPossibleNum(str, maxi, k-1);
+            swap(str[i], str[j]);
+        }
+    }
+    cout<<maxi;
+}
+
+
+int main(int argc, const char * argv[])
+{
+    
+    string str,maxi;
+    int k;
+    cin>>str;
+    maxi=str;
+    cin>>k;
+    maxPossibleNum(str, maxi, k);
+    return 0;
+}
