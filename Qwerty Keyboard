@@ -1,0 +1,61 @@
+//
+//  main.cpp
+//  hmm
+//
+//  Created by aashna on 25/06/17.
+//  Copyright © 2017 q. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <string>
+#include <climits>
+#include <stdio.h>
+#include <string.h>
+#include <cassert>
+#include <algorithm>
+#include <stack>
+#include <map>
+#include <list>
+#include <set>
+#include <math.h>
+
+using namespace std;
+
+string directory[]={"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+
+void find(int *z, string str, int n, int k)
+{
+    if(str.size()==n)
+    {
+        cout<<str<<endl;
+        return;
+    }
+    int j,i;
+    for (i=k ; i<n ; i++)
+    {
+        for (j=0; j<directory[z[i]-1].size(); j++)
+        {
+            str=str+directory[i][j];
+            find(z, str, n, i+1);
+            str.erase(str.begin()+str.size()-1);
+        }
+    }
+    
+}
+
+int main(int argc, const char * argv[])
+{
+    int i,n;
+    cin>>n;
+    int *ar=new int[n];
+    for (i=0; i<n ; i++)
+    {
+        cin>>ar[i];
+    }
+    find(ar, "", n, 0);
+   
+    return 0;
+}
