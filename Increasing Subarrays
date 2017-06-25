@@ -1,0 +1,58 @@
+//
+//  main.cpp
+//  hmm
+//
+//  Created by aashna on 25/06/17.
+//  Copyright © 2017 q. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <string>
+#include <climits>
+#include <stdio.h>
+#include <string.h>
+#include <cassert>
+#include <algorithm>
+#include <stack>
+#include <map>
+#include <list>
+#include <set>
+#include <math.h>
+
+using namespace std;
+
+void countSubarray(int *ar, int n)
+{
+    int i,cnt=0,len=1;
+    for (i=0; i<n ; i++)
+    {
+        if(ar[i+1]>ar[i])
+        {
+            cnt+=len;
+            len++;
+        }
+        else
+            len=1;
+    }
+    cout<<cnt;
+}
+
+
+int main(int argc, const char * argv[])
+{
+    
+    int i,n,ele;
+    cin>>n;
+    int *ar=new int[n];
+    for (i=0; i<n; i++)
+    {
+        cin>>ar[i];
+    }
+    countSubarray(ar, n);
+    return 0;
+}
+
+
