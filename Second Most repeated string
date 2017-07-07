@@ -1,0 +1,81 @@
+//
+//  main.cpp
+//  oky
+//
+//  Created by aashna on 20/06/17.
+//  Copyright © 2017 q. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <string>
+#include <climits>
+#include <stdio.h>
+#include <string.h>
+#include <cassert>
+#include <algorithm>
+#include <stack>
+#include <map>
+#include <unordered_map>
+#include <list>
+#include <set>
+#include <math.h>
+#include <sstream>
+
+using namespace std;
+
+void insertInto(string word, map<string, int> &m)
+{
+    if(m.find(word)!=m.end())
+        m[word]++;
+    else
+        m.insert(map<string, int>::value_type(word,1));
+}
+
+void findSecondMax(map<string, int> &m)
+{
+    vector<int> v;
+    map<string, int>::iterator p;
+    int i;
+    for (p=m.begin(); p!=m.end(); p++)
+    {
+        v.push_back(p->second);
+    }
+    sort(v.begin(), v.end());
+    vector<int>::iterator t;
+    int max=v[v.size()-1];
+    for (t=v.end()-1; t!=v.begin(); t--)
+    {
+        if(*t<max)
+        {
+            max=*t;
+            break;
+        }
+    }
+    for (p=m.begin(); p!=m.end(); p++)
+    {
+        if(p->second==max)
+        {
+            cout<<p->first;
+            break;
+        }
+    }
+}
+
+int main(int argc, const char * argv[])
+{
+    int i,n;
+    cin>>n;
+    map<string, int> m;
+    string word;
+    for (i=0; i<n ; i++)
+    {
+        cin>>word;
+        insertInto(word, m);
+    }
+
+    findSecondMax(m);
+    return 0;
+}
