@@ -1,0 +1,57 @@
+//
+//  main.cpp
+//  oky
+//
+//  Created by aashna on 20/06/17.
+//  Copyright © 2017 q. All rights reserved.
+//
+
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <string>
+#include <climits>
+#include <stdio.h>
+#include <string.h>
+#include <cassert>
+#include <utility>
+#include <algorithm>
+#include <stack>
+#include <map>
+#include <unordered_map>
+#include <list>
+#include <queue>
+#include <set>
+#include <math.h>
+#include <sstream>
+
+using namespace std;
+
+void printDistinct(int low, int high)
+{
+    int i,n;
+    for (i=low; i<=high; i++)
+    {
+        bool vis[10]={false};
+        n=i;
+        while (n!=0)
+        {
+            if(vis[n%10])
+                break;
+            vis[n%10]=true;
+            n/=10;
+        }
+        if(n==0)
+            cout<<i<<" ";
+    }
+    
+}
+
+int main()
+{
+    int low,high;
+    cin>>low>>high;
+    printDistinct(low, high);
+    return 0;
+}
